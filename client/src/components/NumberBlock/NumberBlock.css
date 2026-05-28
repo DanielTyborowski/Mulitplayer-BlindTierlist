@@ -1,0 +1,17 @@
+.numberBlockContainer{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+
+.numberBlockContainer p{
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: white;
+}

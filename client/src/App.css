@@ -1,0 +1,24 @@
+.main{
+  display: flex;
+  
+}
+
+
+.leftBlockContainer{
+  width: 30%;
+  height: 100vh;
+  background-color: orange;
+
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+
+.tierlistBoard{
+  display: flex;
+
+  background-color: darkgray;
+}

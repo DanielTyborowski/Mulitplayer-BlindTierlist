@@ -1,0 +1,18 @@
+.pickNumberContainer{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    row-gap: 10px;
+    column-gap: 40px;
+}
+
+
+.pickNumberContainer button{
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: white;
+   
+}

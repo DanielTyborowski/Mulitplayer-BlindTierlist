@@ -1,0 +1,30 @@
+.itemCardContainer{
+    width: 300px;
+    height: 300px;
+    background-color: aqua;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+
+
+}
+
+.itemCardTextContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.itemImage{
+    width: 250px;
+    height: 250px;
+    background-color: aquamarine;
+}
+
+.itemName{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: large;
+}

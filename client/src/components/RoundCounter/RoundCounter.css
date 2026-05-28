@@ -1,0 +1,27 @@
+.roundCounterContainer{
+    width: 100px;
+    height: 20px;
+    background-color: bisque;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: solid;
+    border-color: black;
+    border-radius: 5%;
+    
+}
+
+
+.playRound{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: large;
+
+}
+
+
+
+.roundCounter{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: large;
+}
