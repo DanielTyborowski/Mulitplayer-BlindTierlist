@@ -6,7 +6,7 @@ const NumberBlock = ({rows}) => {
         <div className='numberBlockContainer'>
             <p>leer</p>
             {Array.from({length:rows}).map((_,i) =>(
-                <p key={i} className='numberBlock'>{rows-i}</p>
+                <p key={i} className='numberBlock'>{i+1}</p>
             ))}
 
 

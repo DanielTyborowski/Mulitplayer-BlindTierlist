@@ -1,4 +1,5 @@
 .pickNumberContainer{
+    margin-top: 20px;
     display: grid;
     grid-template-columns: repeat(2,1fr);
     row-gap: 10px;
@@ -15,4 +16,10 @@
     cursor: pointer;
     background-color: white;
    
+}
+
+
+.pickNumberContainer button.selected{
+    background-color: lightblue;
+    border-color: blue;
 }

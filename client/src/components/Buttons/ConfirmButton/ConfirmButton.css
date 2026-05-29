@@ -1,0 +1,10 @@
+.confirmButton {
+    margin-top: 20px;
+    width: 200px;
+    height: 70px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: white;
+}

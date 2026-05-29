@@ -1,9 +1,9 @@
 import './ItemCard.css';
 import RoundCounter from '../RoundCounter/RoundCounter';
 
-const ItemCard = ({item, onNext}) =>{
+const ItemCard = ({item, index}) =>{
 
-    console.log(item.img);
+    
     
     return(
         <div className='itemCardContainer'>
@@ -12,7 +12,7 @@ const ItemCard = ({item, onNext}) =>{
             </div>
             <div className='itemCardTextContainer'>
                 <div className='itemName'>{item.name}</div>
-                <RoundCounter onNext={onNext}></RoundCounter>
+                <RoundCounter counter={index}></RoundCounter>
             </div>
             
         </div>

@@ -1,5 +1,26 @@
+
+.playerColumnContainer{
+    padding-left: 5px;
+    padding-right: 5px;
+    display: flex;
+    flex-direction: column;
+}
+.slots{
+    
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 5px;
+}
+
 .slot span{
     width: 100px;
     height: 100px;
     background-color: white;
+}
+
+.slot img{
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
 }

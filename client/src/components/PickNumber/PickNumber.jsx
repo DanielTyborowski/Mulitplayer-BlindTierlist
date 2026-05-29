@@ -1,18 +1,40 @@
+import ConfirmButton from '../Buttons/ConfirmButton/ConfirmButton';
 import './PickNumber.css'
 
 
-const PickNumber = ({}) =>{
+const PickNumber = ({selectedPosition, onSelect, onNext, takenPositions}) =>{
 
     return(
+        <>
         <div className='pickNumberContainer'>
-            {Array.from({length:10}).map((_,i) =>(
-                <button key={i} className='numberBlock'>{10-i}</button>
-            ))}
+            {Array.from({ length: 10 }).map((_, i) => {
+                    
+                    const isTaken = takenPositions.includes(i);
+                    const isSelected = selectedPosition === i;
 
+                    return (
+                        <button
+                            key={i}
+                            className={`numberBlock 
+                                ${isSelected ? 'selected' : ''} 
+                                ${isTaken ? 'taken' : ''}`}
+                            onClick={() => !isTaken && onSelect(i)}
+                            disabled={isTaken}
+                        >
+                            {i + 1}
+                        </button>
+                    );
+                })}
+
+            
+
+            
 
           
 
         </div>
+        <ConfirmButton onNext={onNext}></ConfirmButton>
+        </>
     )
 
 }
