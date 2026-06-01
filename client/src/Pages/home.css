@@ -1,0 +1,44 @@
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+.home-container h1 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+
+.home-button-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+
+}
+
+.home-button-container button{
+    margin: 5px;
+    width: 200px;
+    height: 50px;
+
+    border-radius: 20px;
+    box-shadow: 8px;
+    border-color: transparent;
+    
+    background-color: #212163;
+    font-size: large;
+    color:white;
+
+    transition-duration: 0.4s;
+}
+
+
+.home-button-container button:hover {
+    background-color: red;
+
+}

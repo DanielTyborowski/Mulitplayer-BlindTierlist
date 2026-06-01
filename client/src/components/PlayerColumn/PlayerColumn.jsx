@@ -2,6 +2,8 @@ import { useState } from 'react';
 import './PlayerColumn.css'
 
 const PlayerColumn = ({ player, placements, previewItem, previewPosition }) => {
+
+    
     return (
         <div className='playerColumnContainer'>
             <h2>{player}</h2>
@@ -13,7 +15,7 @@ const PlayerColumn = ({ player, placements, previewItem, previewPosition }) => {
                     return (
                         <div key={i} className={`slot ${isPreview ? 'preview' : ''}`}>
                             {display ? (
-                                <img src={display.img} alt={display.name} />
+                                <img src={`http://localhost:2500${display.img}`} alt={display.name} />
                             ) : (
                                 <span>leer</span>
                             )}

@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react'
 
 import '../App.css'
 
+
+
+
 //components
 import ItemCard from '../components/ItemCard/ItemCard'
 import PickNumber from '../components/PickNumber/PickNumber'
@@ -10,10 +13,31 @@ import PlayerColumn from '../components/PlayerColumn/PlayerColumn'
 
 
 
+
+const tierlists = {
+  food:{
+    id: 'food',
+    name: 'Food',
+    type: 'random',
+    pool:[
+      {name: 'pizza', img: '../public/pizza.png'},
+      {name: 'sushi', img: '../public/sushi.png'},
+      {name: 'lasagne', img: '../public/lasagne.png'},
+      {name: 'Suppe', img: '../public/suppe.png' },
+      {name: 'franzbrötchen', img: '../public/franzbroetchen.png'},
+      {name: 'schinken', img: '../public/schinken.png'},
+      {name: 'curry', img: '../public/curry.png'},
+      {name: 'karaage', img: '../public/karaage.png'},
+      {name: 'udon', img: '../public/udon.png'},
+      {name: 'sauerkraut', img: '../public/sauerkraut.png'},
+    ]
+  }
+}
+
 const rooms = {
     room1: {
       id: 'room1',
-      tierlistId: 'movie',
+      tierlistId: 'food',
       round: 1,
       maxRounds: 10,
       votes: {},
@@ -24,7 +48,11 @@ const rooms = {
 
 
 
-function Tierlist() {
+
+
+
+
+function App() {
     const [currentItemIndex, setCurrentItemIndex] = useState(0);
     const [selectedPosition, setSelectedPosition] = useState(null);
 
@@ -49,17 +77,15 @@ function Tierlist() {
     const [items, setItems] = useState([]);
 
     useEffect(() => {
-      fetch('http://localhost:2500/tierlist/tierlist:movies')
+      fetch('http://localhost:2500/tierlist/food')
       .then(res => res.json())
-
-
-      .then(doc => doc && setItems(doc.pool))
+      .then(doc => doc && setItems(doc.items))
     },[])
     
 
     //const [items] = useState(() => getItems(activeRoom.tierlistId))
 
-    
+    updated
 
     // placement[playerIndex][slotIndex] = item
     const [placement, setPlacement] = useState(
@@ -84,7 +110,7 @@ function Tierlist() {
      
         const newPlacement = placement.map((playerSlots) => {
             const updated = [...playerSlots];
-            updated[selectedPosition] = items[currentItemIndex];
+            updated[selectedPosition] = items[currentIndex];
             return updated;
         });
 
@@ -117,7 +143,7 @@ function Tierlist() {
         <div className='leftBlockContainer'>
           
           {items?.length&&
-            <ItemCard item={items[currentItemIndex]} index={currentItemIndex +1} ></ItemCard>
+            <ItemCard item={items[currentIndex]} index={currentItemIndex +1} ></ItemCard>
           }
           <PickNumber
                     selectedPosition={selectedPosition}
@@ -145,7 +171,7 @@ function Tierlist() {
                           key={i}
                           player={player}
                           placements={placement[i]}
-                          previewItem={items[currentItemIndex]}
+                          previewItem={items[currentIndex]}
                           previewPosition={selectedPosition}
                       />
                     ))}
@@ -164,4 +190,4 @@ function Tierlist() {
 
 }
 
-export default Tierlist
+export default App

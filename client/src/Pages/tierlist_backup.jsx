@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react'
 
 import '../App.css'
 
+
+
+
 //components
 import ItemCard from '../components/ItemCard/ItemCard'
 import PickNumber from '../components/PickNumber/PickNumber'
@@ -10,10 +13,31 @@ import PlayerColumn from '../components/PlayerColumn/PlayerColumn'
 
 
 
+
+const tierlists = {
+  food:{
+    id: 'food',
+    name: 'Food',
+    type: 'random',
+    pool:[
+      {name: 'pizza', img: '../public/pizza.png'},
+      {name: 'sushi', img: '../public/sushi.png'},
+      {name: 'lasagne', img: '../public/lasagne.png'},
+      {name: 'Suppe', img: '../public/suppe.png' },
+      {name: 'franzbrötchen', img: '../public/franzbroetchen.png'},
+      {name: 'schinken', img: '../public/schinken.png'},
+      {name: 'curry', img: '../public/curry.png'},
+      {name: 'karaage', img: '../public/karaage.png'},
+      {name: 'udon', img: '../public/udon.png'},
+      {name: 'sauerkraut', img: '../public/sauerkraut.png'},
+    ]
+  }
+}
+
 const rooms = {
     room1: {
       id: 'room1',
-      tierlistId: 'movie',
+      tierlistId: 'food',
       round: 1,
       maxRounds: 10,
       votes: {},
@@ -24,7 +48,11 @@ const rooms = {
 
 
 
-function Tierlist() {
+
+
+
+
+function App() {
     const [currentItemIndex, setCurrentItemIndex] = useState(0);
     const [selectedPosition, setSelectedPosition] = useState(null);
 
@@ -49,7 +77,7 @@ function Tierlist() {
     const [items, setItems] = useState([]);
 
     useEffect(() => {
-      fetch('http://localhost:2500/tierlist/tierlist:movies')
+      fetch('http://localhost:2500/tierlist/tierlist:food')
       .then(res => res.json())
 
 
@@ -164,4 +192,4 @@ function Tierlist() {
 
 }
 
-export default Tierlist
+export default App

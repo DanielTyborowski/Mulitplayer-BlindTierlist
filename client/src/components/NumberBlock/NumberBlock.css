@@ -7,11 +7,14 @@
 
 
 .numberBlockContainer p{
+    padding: 10px;
     width: 70px;
-    height: 70px;
+    height: 10vh;
     text-align: center;
-    border: 1px solid #ccc;
+    border: 1px solid transparent;
     border-radius: 5px;
     cursor: pointer;
     background-color: white;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: large;
 }

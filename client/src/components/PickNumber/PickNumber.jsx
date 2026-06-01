@@ -4,6 +4,11 @@ import './PickNumber.css'
 
 const PickNumber = ({selectedPosition, onSelect, onNext, takenPositions}) =>{
 
+
+    const colors = ['#ff33cf', '#ff8b33', '#fff533', '#33ff36', 
+        '#33c5ff', '#3363ff', '#7433ff', '#036a30', 
+        '#ff3a33', '#FFA833']
+
     return(
         <>
         <div className='pickNumberContainer'>
@@ -20,6 +25,7 @@ const PickNumber = ({selectedPosition, onSelect, onNext, takenPositions}) =>{
                                 ${isTaken ? 'taken' : ''}`}
                             onClick={() => !isTaken && onSelect(i)}
                             disabled={isTaken}
+                            style={{ backgroundColor: colors[i] }}
                         >
                             {i + 1}
                         </button>
@@ -33,7 +39,7 @@ const PickNumber = ({selectedPosition, onSelect, onNext, takenPositions}) =>{
           
 
         </div>
-        <ConfirmButton onNext={onNext}></ConfirmButton>
+        <ConfirmButton className="confirmButton" onNext={onNext}></ConfirmButton>
         </>
     )
 

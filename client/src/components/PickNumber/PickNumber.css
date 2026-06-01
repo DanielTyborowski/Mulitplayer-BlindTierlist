@@ -15,6 +15,8 @@
     border-radius: 5px;
     cursor: pointer;
     background-color: white;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: large;
    
 }
 
@@ -22,4 +24,29 @@
 .pickNumberContainer button.selected{
     background-color: lightblue;
     border-color: blue;
+}
+
+
+.pickNumberContainer button.taken{
+    background-color: lightgray;
+    border-color: gray;
+    cursor: not-allowed;
+}
+
+
+.confirmButton{
+    margin-top: 20px;
+    width: 150px;
+    height: 50px;
+    background-color: #212163;
+    color: white;
+    font-size: large;
+    border-radius: 20px;
+    border-color: transparent;
+    cursor: pointer;
+
+    transition-duration: 0.4s;
+}
+.confirmButton:hover {
+    background-color: red;
 }

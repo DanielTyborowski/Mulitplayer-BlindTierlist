@@ -12,11 +12,12 @@ import ItemCard from './components/ItemCard/ItemCard'
 import PickNumber from './components/PickNumber/PickNumber'
 import NumberBlock from './components/NumberBlock/NumberBlock'
 import PlayerColumn from './components/PlayerColumn/PlayerColumn'
+import { useEffect } from 'react'
 
 
 
 
-const tierlists = {
+/*const tierlists = {
   food:{
     id: 'food',
     name: 'Food',
@@ -34,7 +35,7 @@ const tierlists = {
       {name: 'sauerkraut', img: '../public/sauerkraut.png'},
     ]
   }
-}
+}*/
 
 const rooms = {
     room1: {
@@ -59,6 +60,10 @@ function App() {
     const [selectedPosition, setSelectedPosition] = useState(null);
 
 
+
+    
+
+
     const pickRandomItems = (pool, count = 10) =>{
       return [...pool].sort(() => Math.random() -0.5).slice(0,count)
     }
@@ -70,7 +75,17 @@ function App() {
 
     const activeRoom = rooms['room1'];
 
-    const [items] = useState(() => getItmes(activeRoom.tierlistId))
+
+    //Serveranfrage
+    const [items, setItems] = useState([]);
+
+    useEffect(() => {
+      fetch('http://localhost:2500/tierlists/tierlist:food')
+      .then(res => res.json())
+      .then(doc => setItems(doc.items))
+    }), []
+
+    //const [items] = useState(() => getItmes(activeRoom.tierlistId))
 
     
 
