@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-import '../App.css'
+import './tierlist.css'
 
 //components
 import ItemCard from '../components/ItemCard/ItemCard'
@@ -118,11 +118,7 @@ useEffect(() => {
         </div>
 
 
-        <button onClick={()=>{
-          console.log('Current GameState:', gameState);
-        }}>
-          GameState log
-        </button>
+        
 
 
       </div>

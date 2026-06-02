@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Nunito:wght@400;600;700;800&display=swap');
+
+:root {
+  --bg-deep:      #12111a;
+  --bg-panel:     #1c1a28;
+  --bg-input:     #16141f;
+  --accent:       #c084fc;
+  --accent-soft:  #c084fc22;
+  --accent-glow:  #c084fc44;
+  --accent-2:     #fb923c;
+  --text-bright:  #f0eaff;
+  --text-muted:   #6b6080;
+  --border:       #2e2840;
+}
+
+.lobby-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background:
+    radial-gradient(ellipse at 30% 40%, #c084fc12 0%, transparent 55%),
+    radial-gradient(ellipse at 75% 70%, #fb923c0a 0%, transparent 50%),
+    var(--bg-deep);
+}
+
+.lobby-container::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(circle, #c084fc18 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.lobby-panel {
+  background: var(--bg-panel);
+  border: 1.5px solid var(--border);
+  border-radius: 24px;
+  padding: 2.5rem 2.8rem;
+  width: 420px;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 0 1px #c084fc18, 0 8px 40px #0008, inset 0 1px 0 #ffffff08;
+}
+
+.lobby-panel::before {
+  content: '✦';
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-panel);
+  color: var(--accent);
+  font-size: 1rem;
+  padding: 0 0.6rem;
+  border: 1.5px solid var(--border);
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lobby-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--text-bright);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.lobby-info {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.lobby-info-block {
+  flex: 1;
+  background: var(--bg-input);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.lobby-label {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 0.5rem;
+  margin-top: 0.8rem;
+}
+
+.lobby-info-block .lobby-label { margin: 0 0 0.2rem; }
+
+.lobby-code {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.6rem;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+}
+
+.lobby-value {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.6rem;
+  color: var(--text-bright);
+}
+
+.lobby-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 1.2rem 0;
+}
+
+.lobby-players {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.lobby-player {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--bg-input);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 0.6rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-bright);
+  transition: border-color 0.2s;
+}
+
+.lobby-player:hover { border-color: var(--accent); }
+
+.player-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  box-shadow: 0 0 6px var(--accent-glow);
+}
+
+.host-badge {
+  margin-left: auto;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: var(--accent-soft);
+  color: var(--accent);
+  padding: 0.2rem 0.6rem;
+  border-radius: 8px;
+  border: 1px solid var(--accent);
+}
+
+.lobby-start-button {
+  width: 100%;
+  padding: 0.85rem;
+  background: var(--accent);
+  border: none;
+  border-radius: 14px;
+  color: #1a0030;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px var(--accent-glow);
+  margin-top: 0.5rem;
+}
+
+.lobby-start-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 28px var(--accent-glow);
+}
+
+.lobby-start-button:active { transform: scale(0.97); }
+
+.lobby-waiting {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-top: 0.5rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}

@@ -1,0 +1,214 @@
+
+:root {
+  --bg-deep:      #12111a;
+  --bg-panel:     #1c1a28;
+  --bg-input:     #16141f;
+  --accent:       #c084fc;
+  --accent-soft:  #c084fc33;
+  --accent-glow:  #c084fc55;
+  --accent-2:     #fb923c;
+  --text-bright:  #f0eaff;
+  --text-muted:   #6b6080;
+  --border:       #2e2840;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg-deep);
+  font-family: 'Nunito', sans-serif;
+}
+
+.create-room-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background:
+    radial-gradient(ellipse at 30% 40%, #c084fc12 0%, transparent 55%),
+    radial-gradient(ellipse at 75% 70%, #fb923c0a 0%, transparent 50%),
+    var(--bg-deep);
+}
+
+/* Retro dot grid */
+.create-room-container::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(circle, #c084fc18 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Panel */
+.create-room-panel {
+  background: var(--bg-panel);
+  border: 1.5px solid var(--border);
+  border-radius: 24px;
+  padding: 2.5rem 2.8rem;
+  width: 380px;
+  position: relative;
+  z-index: 1;
+  box-shadow:
+    0 0 0 1px #c084fc18,
+    0 8px 40px #0008,
+    inset 0 1px 0 #ffffff08;
+}
+
+/* Decorative corner badge */
+.create-room-panel::before {
+  content: '✦';
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-panel);
+  color: var(--accent);
+  font-size: 1.2rem;
+  padding: 0 0.6rem;
+  border: 1.5px solid var(--border);
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.create-room-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--text-bright);
+  text-align: center;
+  margin-bottom: 0.3rem;
+  letter-spacing: 0.01em;
+}
+
+.create-room-title span {
+  color: var(--accent);
+}
+
+.create-room-container > p,
+.create-room-panel > p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: 1.8rem;
+  letter-spacing: 0.03em;
+}
+
+.create-room-panel > p strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* Labels */
+.create-room-panel label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+  margin-top: 1.1rem;
+}
+
+/* Selects */
+.create-room-panel select {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  background: var(--bg-input);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  color: var(--text-bright);
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  appearance: none;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b6080' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+}
+
+.create-room-panel select:hover,
+.create-room-panel select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.create-room-panel select option {
+  background: var(--bg-panel);
+  color: var(--text-bright);
+}
+
+/* Divider */
+.create-room-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 1.6rem 0 0.4rem;
+}
+
+/* Buttons */
+.create-room-button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.8rem;
+}
+
+.create-room-button {
+  width: 100%;
+  padding: 0.8rem;
+  background: var(--accent);
+  border: none;
+  border-radius: 14px;
+  color: #1a0030;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.2s, background 0.2s;
+  box-shadow: 0 4px 20px var(--accent-glow);
+}
+
+.create-room-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 28px var(--accent-glow);
+  background: #d8a4ff;
+}
+
+.create-room-button:active {
+  transform: translateY(0px) scale(0.98);
+  box-shadow: 0 2px 10px var(--accent-soft);
+}
+
+/* Back button — ghost style */
+.back-button {
+  width: 100%;
+  padding: 0.75rem;
+  background: transparent;
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  color: var(--text-muted);
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.back-button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+}

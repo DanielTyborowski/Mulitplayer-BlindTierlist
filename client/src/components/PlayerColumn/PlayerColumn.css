@@ -5,12 +5,28 @@
     display: flex;
     flex-direction: column;
 }
+
+
+.player-column-name{
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    height: 67px;
+    border-radius: 8px;
+
+    margin-top: 0;
+    margin-bottom: 2px;
+}
 .slots{
     
     display: flex;
     flex-direction: column;
     gap: 5px;
     margin-top: 5px;
+    border-radius: 8px;
 }
 
 
@@ -20,6 +36,7 @@
 .image-placeholder{
     width: 200px;
     height: 110px;
+    border-radius: 8px;
     background-color: #ccc;
 }
 
@@ -28,4 +45,6 @@
     height: 110px;
     object-fit: cover;
     object-position: center;
+
+    border-radius: 8px;
 }

@@ -1,3 +1,8 @@
+
+import './createRoom.css'
+
+import BackButton from '../components/Buttons/BackButton/BackButton';
+
 import { useEffect, useState } from "react";
 
 const CreateRoom = ({username, onCreateRoom,onNavigate, onBack}) =>{
@@ -24,47 +29,51 @@ const CreateRoom = ({username, onCreateRoom,onNavigate, onBack}) =>{
 
     return (
             <div className="create-room-container">
-                <h2>Raum erstellen</h2>
-                <p>Spieler: <strong>{username}</strong></p>
+                <div className='create-room-panel'>
+                    <h2 className='create-room-title'>Raum erstellen</h2>
+                    <p>Spieler: <strong>{username}</strong></p>
 
-                <label>Runden</label>
-                <select value={rounds} onChange={(e) => setRounds(Number(e.target.value))}>
-                    <option value={5}>5 Runde</option>
-                    <option value={10}>10 Runden</option>
-                </select>
+                    <label>Runden</label>
+                    <select value={rounds} onChange={(e) => setRounds(Number(e.target.value))}>
+                        <option value={5}>5 Runde</option>
+                        <option value={10}>10 Runden</option>
+                    </select>
 
-                <label>Spieler</label>
-                <select value={maxPlayer} onChange={(e) => setRounds(Number(e.target.value))}>
-                    <option value={2}>2 Spieler</option>
-                    <option value={3}>3 Spieler</option>
-                    <option value={4}>4 Spieler</option>
-                    <option value={5}>5 Spieler</option>
+                    {/* 
+                    <label>Spieler</label>
+                    <select value={maxPlayer} onChange={(e) => setRounds(Number(e.target.value))}>
+                        <option value={2}>2 Spieler</option>
+                        <option value={3}>3 Spieler</option>
+                        <option value={4}>4 Spieler</option>
+                        <option value={5}>5 Spieler</option>
 
-                </select>
+                    </select>
+                        */}
+                    <label>Tierlist</label>
+                    <select value={selectedTierlist} onChange={(e) => setSelectedTierlist(e.target.value)}>
+                    {tierlists.map(tl => (
+                        <option key={tl._id} value={tl._id}>{tl.name}</option>
+                    ))}
+                    </select>
 
-                <label>Tierlist</label>
-                <select value={selectedTierlist} onChange={(e) => setSelectedTierlist(e.target.value)}>
-                {tierlists.map(tl => (
-                    <option key={tl._id} value={tl._id}>{tl.name}</option>
-                ))}
-                </select>
+                    <label>Modus</label>
+                    <select value={selectMode} onChange={(e) => setSelectMode(e.target.value)}>
+                        <option value={'random'}>Random</option>
+                        <option value={'inOrder'}>In Order</option>
+        
 
-                <label>Modus</label>
-                <select value={selectMode} onChange={(e) => setSelectMode(e.target.value)}>
-                    <option value={'random'}>Random</option>
-                    <option value={'inOrder'}>In Order</option>
-      
+                    </select>
+                    
 
-                </select>
-                
-
-                <div className="button-container">
-                    <button onClick={() => {
-                        onCreateRoom(username, rounds, selectedTierlist, selectMode )
-                        onNavigate('lobby')
-                    }}
-                    >Raum erstellen</button>
-                    <button onClick={onBack}>Zurück</button>
+                    <div className="create-room-button-container">
+                        <button className='create-room-button' onClick={() => {
+                            onCreateRoom(username, rounds, selectedTierlist, selectMode )
+                            onNavigate('lobby')
+                        }}
+                        >Raum erstellen</button>
+                        <BackButton onBack={onBack}></BackButton>
+                        
+                    </div>
                 </div>
             </div>
         );

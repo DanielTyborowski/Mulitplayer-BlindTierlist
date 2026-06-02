@@ -42,8 +42,9 @@ const Home = ({ onNavigate }) => {
             <div className="home-container">
                 <h1>Willkommen zum Multiplayer Blind Tierlist Maker!</h1>
                 <input
+                    className='nameInput'
                     type='text'
-                    placeholder='' 
+                    placeholder='Name eingeben' 
                     value={username}
                     onChange={(e) => {setUsername(e.target.value); setError('')}}
                 ></input>

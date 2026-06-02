@@ -1,20 +1,37 @@
-.numberBlockContainer{
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Nunito:wght@400;600;700;800&display=swap');
+
+.numberBlockContainer {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+
+
 }
 
+.numberBlockContainer .numberBlock{
+    margin:2px;
 
-.numberBlockContainer p{
-    padding: 10px;
-    width: 70px;
-    height: 10vh;
-    text-align: center;
-    border: 1px solid transparent;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: white;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: large;
+}
+.numberBlockContainer p {
+
+  width: 110px;
+  height: 112px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-family: 'DM Serif Display', serif;
+  font-size: 4rem;
+  color: #ffffff;
+  text-shadow: 2px 2px 5px #000000;
+  flex-shrink: 0;
+}
+
+.numberBlockContainer p:first-child {
+    margin: 0;
+    height: 80px;
+  background: transparent !important;
+  color: transparent;
+  pointer-events: none;
+  text-shadow: none;
 }

@@ -1,0 +1,22 @@
+.back-button{
+    margin: 10px;
+    width: 150px;
+    height: 50px;
+
+    margin-top: 30px;
+
+    border-radius: 20px;
+    box-shadow: 8px;
+    border-color: transparent;
+    
+    background-color: #e36b03;
+    font-size: large;
+    color:white;
+    transition-duration: 0.4s;
+}
+
+
+.back-button button:hover {
+    background-color: red;
+
+}

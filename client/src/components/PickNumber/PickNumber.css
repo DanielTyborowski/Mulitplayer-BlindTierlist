@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Nunito:wght@400;600;700;800&display=swap');
+
 .pickNumberContainer{
     margin-top: 20px;
     display: grid;
@@ -8,28 +10,30 @@
 
 
 .pickNumberContainer button{
-    width: 70px;
-    height: 70px;
+    width: 90px;
+    height: 90px;
     text-align: center;
-    border: 1px solid #ccc;
+    border: 1px solid #141111;
     border-radius: 5px;
     cursor: pointer;
-    background-color: white;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: large;
+    font-family: 'DM Serif Display', serif;
+    font-size: 3rem;
+    color: white;
+    text-shadow: 2px 2px 5px #000000;
    
 }
 
 
 .pickNumberContainer button.selected{
-    background-color: lightblue;
-    border-color: blue;
+
+    border: 10px;
+    border-color: white;
 }
 
 
 .pickNumberContainer button.taken{
-    background-color: lightgray;
-    border-color: gray;
+
+    
     cursor: not-allowed;
 }
 
@@ -50,3 +54,6 @@
 .confirmButton:hover {
     background-color: red;
 }
+
+
+

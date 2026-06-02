@@ -9,7 +9,7 @@ const RoundCounter = ({counter}) => {
     return(
         <div className='roundCounterContainer'>
             <p className='playRound'>Runde</p>
-            <p className='roundCounter'>{counter}/10</p>
+            <p className='roundCounter'> {counter}/10</p>
         </div>
         
     )

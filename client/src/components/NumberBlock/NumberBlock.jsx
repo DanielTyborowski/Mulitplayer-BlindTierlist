@@ -2,9 +2,9 @@ import './NumberBlock.css'
 
 
 const NumberBlock = ({rows}) => {
-    const colors = ['#ff33cf', '#ff8b33', '#fff533', '#33ff36', 
-        '#33c5ff', '#3363ff', '#7433ff', '#036a30', 
-        '#ff3a33', '#FFA833']
+    const colors = ['#ff0000', '#ff6f00', '#fff64c', '#75af48', 
+        '#208000', '#00a2ff', '#003cff', '#390096', 
+        '#6b0086', '#bd0032']
 
     
     return(

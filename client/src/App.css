@@ -1,5 +1,22 @@
-body{
- 
+:root {
+  --bg-deep:      #12111a;
+  --bg-panel:     #1c1a28;
+  --bg-input:     #16141f;
+  --accent:       #c084fc;
+  --accent-soft:  #c084fc22;
+  --accent-glow:  #c084fc44;
+  --accent-2:     #fb923c;
+  --text-bright:  #f0eaff;
+  --text-muted:   #6b6080;
+  --border:       #2e2840;
+}
+
+
+
+body {
+  background: var(--bg-deep);
+
+  color: var(--text-bright);
 }
 
 
@@ -10,9 +27,9 @@ body{
 
 
 .leftBlockContainer{
-  width: 30%;
+  width: 30vw;
   height: 100vh;
-  background-color: orange;
+ 
 
 
   display: flex;
@@ -22,10 +39,14 @@ body{
 
 
 
-.tierlistBoard{
-  display: flex;
 
-  background-color: darkgray;
+.tierlistBoard{
+  margin-left: 5vw;
+  display: flex;
+  width: 70vw;
+  height: 100vh;
+
+
 }
 
 

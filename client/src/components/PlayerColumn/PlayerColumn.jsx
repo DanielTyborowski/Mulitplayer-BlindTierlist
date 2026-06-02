@@ -8,7 +8,7 @@ const PlayerColumn = ({ player, placements, previewItem, previewPosition }) => {
     
     return (
         <div className='playerColumnContainer'>
-            <h2>{player}</h2>
+            <h2 className='player-column-name'>{player}</h2>
             <div className='slots'>
                 {placements.map((item, i) => {
                     const isPreview = previewPosition === i && !item;

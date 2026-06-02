@@ -1,0 +1,13 @@
+.readyCounter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 150px;
+  height: 50px;
+  margin-top: 20px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.2rem;
+  background-color: brown;
+  border-radius: 8px;
+}
