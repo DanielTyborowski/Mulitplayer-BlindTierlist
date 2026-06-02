@@ -71,8 +71,8 @@ const App = () => {
   }
 
 
-  const handleCreateRoom=(name, rounds, selectedTierlist) =>{
-    sendJsonMessage({type: 'CREATE_ROOM' , payload : {playerName: name, totalRounds: rounds, tierlistId: selectedTierlist }});
+  const handleCreateRoom=(name, rounds, selectedTierlist, selectMode) =>{
+    sendJsonMessage({type: 'CREATE_ROOM' , payload : {playerName: name, totalRounds: rounds, tierlistId: selectedTierlist, mode: selectMode }});
   }
 
 

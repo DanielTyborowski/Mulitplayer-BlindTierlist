@@ -72,7 +72,7 @@ const generateCode = () => {
 
 
 
-const handleMessage = (uuid, message) => {
+const handleMessage = async (uuid, message) => {
     const data = JSON.parse(message);
     const {type, payload} = data;
     const user = users[uuid];
@@ -82,12 +82,25 @@ const handleMessage = (uuid, message) => {
 
 
     if (type === 'CREATE_ROOM'){
-        const { playerName, totalRounds, tierlistId} = payload;
+        const { playerName, totalRounds, tierlistId, mode} = payload;
         const code = generateCode();
+
+
+
+        const doc = await db.get(tierlistId);
+        let pool = [...doc.pool];
+
+        if (mode === 'random'){
+            for(let i = pool.length - 1 ; i > 0; i--){
+                const j = Math.floor(Math.random() * (i +1));
+                [pool[i], pool[j]] = [pool[j], pool[i]]
+            }
+        }
 
         rooms[code] = {
             hostId: uuid,
             tierlistId,
+            pool,
             players: [{
                 id: uuid,
                 name: playerName,
@@ -96,6 +109,7 @@ const handleMessage = (uuid, message) => {
             }],
             gameState:{
                 phase: 'LOBBY',
+                mode: mode,
                 currentRound: 0,
                 totalRounds,
                 placements: {},
@@ -114,6 +128,7 @@ const handleMessage = (uuid, message) => {
             type: 'GAME_STATE',
             payload: {
                 code, 
+                pool: rooms[code].pool,
                 hostId: uuid,
                 players: [{id: uuid, name: playerName, state: user.state}],
                 gameState: rooms[code].gameState,
@@ -146,6 +161,7 @@ const handleMessage = (uuid, message) => {
                 type: 'GAME_STATE',
                 payload: {
                     //code: gameCode,
+                    pool: room.pool,
                     hostId: room.hostId,
                     myId: id,
                     players: room.players.map(p => ({ id: p.id, name: p.name  })),
@@ -172,6 +188,8 @@ const handleMessage = (uuid, message) => {
 
         if (!room) return;
 
+
+
          //if (room.hostId !== uuid) return;
 
         room.gameState.phase = 'GAME_START';
@@ -179,6 +197,7 @@ const handleMessage = (uuid, message) => {
         broadcast(user.state.roomId, {
         type: 'GAME_STATE',
         payload: {
+            pool: room.pool,
             code: user.state.roomId,
             hostId: room.hostId,
             //myId: uuid,
@@ -217,6 +236,7 @@ const handleMessage = (uuid, message) => {
         ws.send(JSON.stringify({
             type: 'GAME_STATE',
             payload: {
+                pool: room.pool,
                 code: user.state.roomId,
                 hostId: room.hostId,
                 myId: id,
@@ -261,6 +281,7 @@ const handleMessage = (uuid, message) => {
                 ws.send(JSON.stringify({
                     type: 'GAME_STATE',
                     payload: {
+                        pool: room.pool,
                         code: user.state.roomId,
                         hostId: room.hostId,
                         myId: id,

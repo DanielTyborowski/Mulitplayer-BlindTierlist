@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 const CreateRoom = ({username, onCreateRoom,onNavigate, onBack}) =>{
     const [rounds, setRounds] = useState(10);
     const [maxPlayer, setMaxPlayer] =useState(4);
-   
+    const [selectMode, setSelectMode] = useState('random');
 
 
     const [tierlists, setTierlists] = useState([]);
@@ -49,12 +49,18 @@ const CreateRoom = ({username, onCreateRoom,onNavigate, onBack}) =>{
                 ))}
                 </select>
 
-            
+                <label>Modus</label>
+                <select value={selectMode} onChange={(e) => setSelectMode(e.target.value)}>
+                    <option value={'random'}>Random</option>
+                    <option value={'inOrder'}>In Order</option>
+      
+
+                </select>
                 
 
                 <div className="button-container">
                     <button onClick={() => {
-                        onCreateRoom(username, rounds, selectedTierlist )
+                        onCreateRoom(username, rounds, selectedTierlist, selectMode )
                         onNavigate('lobby')
                     }}
                     >Raum erstellen</button>

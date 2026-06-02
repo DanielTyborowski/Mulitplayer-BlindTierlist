@@ -20,14 +20,22 @@ function Tierlist({gameState, onNextRound, onSubmitPosition ,myId}) {
     const currentRound = gs.currentRound;
 
 
+useEffect(() => {
+  if (gameState.pool) setItems(gameState.pool);
+
+  
+}, [gameState.pool]);
 
 
+
+    /*
+    
     useEffect(() => {
       console.log('GameState:',gameState)
       fetch(`http://localhost:2500/tierlist/${gameState.tierlistId}`)
       .then(res => res.json())
       .then(doc => doc && setItems(doc.pool))
-    },[])
+    },[])*/
 
 
     const takenPositions = Object.values(gs.placements[myId]??[])
