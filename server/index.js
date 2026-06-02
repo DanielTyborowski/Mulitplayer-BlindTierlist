@@ -36,28 +36,28 @@ await initDB();
 
 
 
-
 const connections = {};
 const users = {}; 
+const rooms = {}
 
-/*
-const gameState = {
-    rooms: {
-        roomId: {
-            id: 'roomId',
-            tierlistId: 'tierlistId',
-            round: 1,
-            maxRounds: 10,
-            votes: {
-                playerId: position,
-            },
-            players: {},    
-            host: 'playerId1'
-        }
-    }
+
+const broadcast = (roomId, data) => {
+    const room = rooms[roomId]
+    if (!room) return;
+    room.players.forEach(({ws}) =>{
+        ws.send(JSON.stringify(data))
+    })
 }
 
-*/
+
+const getRoomPayload = (room, myId) => ({
+    code: room.code,
+    hostId: room.hostId,
+    tierlistId: room.tierlistId,
+    myId,
+    players: room.players.map(p => ({ id: p.id, name: p.name })),
+    gameState: room.gameState,
+});
 
 
 
@@ -78,6 +78,9 @@ const handleMessage = (uuid, message) => {
     const user = users[uuid];
     if (!user) return;
 
+
+
+
     if (type === 'CREATE_ROOM'){
         const { playerName, totalRounds, tierlistId} = payload;
         const code = generateCode();
@@ -93,8 +96,11 @@ const handleMessage = (uuid, message) => {
             }],
             gameState:{
                 phase: 'LOBBY',
-                currentRound: 1,
+                currentRound: 0,
                 totalRounds,
+                placements: {},
+                submittedThisRound: [],
+     
             }
         };
 
@@ -107,9 +113,10 @@ const handleMessage = (uuid, message) => {
             type: 'GAME_STATE',
             payload: {
                 code, 
-                hostID: uuid,
-                players: [{id: uuid, name: playerName}],
+                hostId: uuid,
+                players: [{id: uuid, name: playerName, state: user.state}],
                 gameState: rooms[code].gameState,
+                tierlistId
             }
         }))
     }
@@ -126,25 +133,156 @@ const handleMessage = (uuid, message) => {
             return;
         }
 
-        room.players.push({ id: uuid, name: playerName, ws: connections[uuid] });
+        room.players.push({ id: uuid, name: playerName, ws: connections[uuid] , isHost: false, ranking: null});
         user.state.roomId = gameCode;
-        console.log('username:', playerName, 'ist raum beigetreten'); 
-        console.log('uuid:', uuid);
+
 
         // Allen im Raum den neuen State schicken
         room.players.forEach(({ ws, id }) => {
             ws.send(JSON.stringify({
+
+                
                 type: 'GAME_STATE',
                 payload: {
-                    code: gameCode,
+                    //code: gameCode,
                     hostId: room.hostId,
                     myId: id,
-                    players: room.players.map(p => ({ id: p.id, name: p.name })),
+                    players: room.players.map(p => ({ id: p.id, name: p.name  })),
                     gameState: room.gameState,
+                    tierlistId: room.tierlistId
                 }
+            /*
+                type: 'GAME_STATE',
+                payload: getRoomPayload(rooms[code], uuid)
+
+                */
             }));
+            
+            
         });
     }
+
+
+    
+    if(type === 'START_GAME') {
+       
+
+        const room = rooms[user.state.roomId];
+
+        if (!room) return;
+
+         //if (room.hostId !== uuid) return;
+
+        room.gameState.phase = 'GAME_START';
+
+        /*
+        room.players.forEach(({ ws, id }) => {
+            sendToClient(ws, {
+                type: 'GAME_STATE',
+                payload: {
+                    code: user.state.roomId,
+                    hostId: room.hostId,
+                    myId: id,   
+                    players: room.players.map(p => ({ id: p.id, name: p.name })),
+                    gameState: room.gameState,
+                    tierlistId: room.tierlistId
+                }
+            })
+
+
+
+*/
+
+
+                 
+        broadcast(user.state.roomId, {
+        type: 'GAME_STATE',
+        payload: {
+            code: user.state.roomId,
+            hostId: room.hostId,
+            //myId: uuid,
+            players: room.players.map(p => ({
+                id: p.id,
+                name: p.name
+            })),
+            gameState: room.gameState,
+            tierlistId: room.tierlistId
+        }
+    });
+    
+    }
+
+
+    if (type === 'SUBMIT_POSITION') {
+        const {position, item} = payload;
+        const room = rooms[user.state.roomId];
+        const gs = room.gameState
+
+        if(!gs.placements[uuid]){
+            gs.placements[uuid] = Array (gs.totalRounds).fill(null);
+        }
+        gs.placements[uuid][position] = item;
+
+        if(!gs.submittedThisRound.includes(uuid)){
+            gs.submittedThisRound.push(uuid);
+        }
+
+        room.players.forEach(({ws, id}) =>{
+            
+            ws.send(JSON.stringify({
+                type:'GAME_STATE',
+                payload:{
+                    code: user.state.roomId,
+                    hostId: room.hostId,
+                    myId: id,
+                    players: room.players.map(p => ({ id: p.id, name: p.name})),
+                    gameState: gs,
+                    tierlistId: room.tierlistId
+                }
+            }))
+        })
+    }
+
+
+    if(type === 'NEXT_ROUND'){
+            
+            const room = rooms[user.state.roomId];
+            console.log('NEXT_ROUND received, hostId:', room.hostId, 'uuid:', uuid);
+            if (room.hostId !== uuid) return
+
+
+            const gs = room.gameState;
+            const allSubmitted = room.players.every(p => gs.submittedThisRound.includes(p.id));
+             if (!allSubmitted) return;
+
+            gs.currentRound += 1;
+            gs.submittedThisRound = [];
+
+            if (gs.currentRound >= gs.totalRounds) {
+                gs.phase = 'GAME_OVER';
+            }
+
+            room.players.forEach(({ ws, id }) => {
+                ws.send(JSON.stringify({
+                    type: 'GAME_STATE',
+                    payload: {
+                        code: user.state.roomId,
+                        hostId: room.hostId,
+                        myId: id,
+                        players: room.players.map(p => ({ id: p.id, name: p.name })),
+                        gameState: gs,
+                        tierlistId: room.tierlistId
+                    }
+                }));
+            });
+        }
+    
+
+
+
+
+
+  
 
 
     if (type === 'SUBMIT_RANKING') {
@@ -183,8 +321,8 @@ wss.on('connection', (connection, request) => {
     const url = new URL(request.url, 'http://localhost');
     const username = url.searchParams.get('username');
     const uuid = uuidv4();
-    console.log('username:', username, 'hat sich verbunden'); 
-    console.log('uuid:', uuid); 
+    //console.log('username:', username, 'hat sich verbunden'); 
+    //console.log('uuid:', uuid); 
 
     connections[uuid] = connection;
 
@@ -197,34 +335,23 @@ wss.on('connection', (connection, request) => {
             ready: false,
         }
     }
-    console.log('users:', users);
+
+
+    connection.send(JSON.stringify({
+        type: 'WELCOME',
+        
+            id: uuid
+
+        
+    }))
+    console.log(uuid)
+    
 
     connection.on('message', (message) => handleMessage(uuid, message));
     connection.on('close', () => handleClose(uuid));
 
     
 });
-
-
-
-
-
-
-
-
-//Speichern des Spiels
-const rooms = {}
-
-
-const broadcast = (roomId, data) => {
-    const room = rooms[roomId]
-    if (!room) return;
-    room.players.forEach(({ws}) =>{
-        ws.send(JSON.stringify(data))
-    })
-}
-
-
 
 
 

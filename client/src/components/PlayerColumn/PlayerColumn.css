@@ -13,14 +13,19 @@
     margin-top: 5px;
 }
 
-.slot span{
-    width: 100px;
-    height: 100px;
-    background-color: white;
+
+
+
+
+.image-placeholder{
+    width: 200px;
+    height: 110px;
+    background-color: #ccc;
 }
 
-.slot img{
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
+.item-image{
+    width: 200px;
+    height: 110px;
+    object-fit: cover;
+    object-position: center;
 }

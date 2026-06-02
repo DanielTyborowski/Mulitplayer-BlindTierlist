@@ -1,7 +1,7 @@
 
 
 
-const Lobby = ({ username, gameState, onNavigate }) => {
+const Lobby = ({ username, gameState, onNavigate, onStartGame }) => {
     const isHost = gameState.myId === gameState.hostId;
 
     return (
@@ -22,6 +22,9 @@ const Lobby = ({ username, gameState, onNavigate }) => {
             {isHost ? (
                 <button onClick= {()=>{
                     onNavigate('tierlist')
+                    onStartGame( username, gameState.code );
+                    
+
                 }}>
                     Spiel starten
                 </button>

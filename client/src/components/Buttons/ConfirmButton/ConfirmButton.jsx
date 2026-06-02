@@ -2,11 +2,13 @@ import './ConfirmButton.css'
 import { useState } from 'react';
 
 
-const ConfirmButton = ({ onNext}) => {
+const ConfirmButton = ({onNext }) => {
 
     
 
     return(
+
+
         <button  className='confirmButton' onClick={onNext}>
             Confirm
         </button>

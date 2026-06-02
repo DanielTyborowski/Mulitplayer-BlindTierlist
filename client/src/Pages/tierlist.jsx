@@ -10,103 +10,48 @@ import PlayerColumn from '../components/PlayerColumn/PlayerColumn'
 
 
 
-const rooms = {
-    room1: {
-      id: 'room1',
-      tierlistId: 'movie',
-      round: 1,
-      maxRounds: 10,
-      votes: {},
-      players: ['max', 'bernd', 'günter'],
-      host: null
-    }
-}
 
+function Tierlist({gameState, onNextRound, onSubmitPosition ,myId}) {
 
-
-function Tierlist() {
-    const [currentItemIndex, setCurrentItemIndex] = useState(0);
     const [selectedPosition, setSelectedPosition] = useState(null);
-
-
-    const pickRandomItems = (pool, count = 10) =>{
-      return [...pool].sort(() => Math.random() -0.5).slice(0,count)
-    }
-
-    const getItems = (tierlistId) =>{
-      const tierlist = tierlists[tierlistId];
-      if (tierlist.type === 'random') return pickRandomItems(tierlist.pool, 10)
-    }
-
-    const activeRoom = rooms['room1'];
-    
-
-
-
-
-    
-    //Serveranfrage
     const [items, setItems] = useState([]);
 
+    const gs = gameState.gameState;
+    const currentRound = gs.currentRound;
+
+
+
+
     useEffect(() => {
-      fetch('http://localhost:2500/tierlist/tierlist:movies')
+      console.log('GameState:',gameState)
+      fetch(`http://localhost:2500/tierlist/${gameState.tierlistId}`)
       .then(res => res.json())
-
-
       .then(doc => doc && setItems(doc.pool))
     },[])
+
+
+    const takenPositions = Object.values(gs.placements[myId]??[])
+      .map((item, i) => item !== null ? i:null)
+      .filter(i => i !== null);
+
+    const hasSubmitted = gs.submittedThisRound.includes(myId);
+
+    const handleConfirm = () =>{
+      if (selectedPosition === null || hasSubmitted)return;
+      onSubmitPosition(selectedPosition, items[currentRound]);
+      setSelectedPosition(null); 
+    }
+
+
+    if(gs.phase === 'GAME_OVER') return <p>SPiel vorbei</p>;
+
+
+  
+
     
 
-    //const [items] = useState(() => getItems(activeRoom.tierlistId))
-
-    
-
-    // placement[playerIndex][slotIndex] = item
-    const [placement, setPlacement] = useState(
-        Array(activeRoom.players.length).fill(null).map(() => Array(10).fill(null))
-    );
 
 
-    const handleSelect = (position) => {
-        setSelectedPosition(position);
-
- 
-
-    };
-
-    const [gameOver, setGameOver] = useState(false);
-
-
-
-    const nextRound = () => {
-
-        if (selectedPosition === null) return;
-     
-        const newPlacement = placement.map((playerSlots) => {
-            const updated = [...playerSlots];
-            updated[selectedPosition] = items[currentItemIndex];
-            return updated;
-        });
-
-        setPlacement(newPlacement);
-        setSelectedPosition(null);
-
-        //verhindert abbruch
-        if (currentItemIndex >= items.length-1) {
-            setGameOver(true);
-        } else {
-            setCurrentItemIndex((prev) => prev + 1);
-        }
-    };
-
-    const takenPositions = placement[0]
-    ?.map((item, i) => item !== null ? i : null)
-    .filter((i) => i !== null) ?? [];
-
-
-
-
-  if(gameOver) return <p>spiel vorbei</p>
   return(
     <>
       <div className='main'>
@@ -117,13 +62,17 @@ function Tierlist() {
         <div className='leftBlockContainer'>
           
           {items?.length&&
-            <ItemCard item={items[currentItemIndex]} index={currentItemIndex +1} ></ItemCard>
+            <ItemCard item={items[currentRound]} index={currentRound +1} ></ItemCard>
           }
           <PickNumber
                     selectedPosition={selectedPosition}
-                    onSelect={handleSelect}
-                    onNext={nextRound}
+                    onSelect={hasSubmitted ? () => {} :setSelectedPosition}
+                    onNext={handleConfirm}
+                    onNextRound={onNextRound}
                     takenPositions={takenPositions}
+                    gameState={gameState}
+                    myId={myId}
+                    hasSubmitted={hasSubmitted}
                 />
         </div>
         
@@ -134,27 +83,38 @@ function Tierlist() {
         <div className='tierlistBoard'>
 
           {/*Keine Funktion nur Deko*/}
-          <NumberBlock rows={items?.length}></NumberBlock>
+          <NumberBlock rows={gameState.gameState.totalRounds}></NumberBlock>
 
           {/*Die Spieler Spalten
           Bekommen Info über wie viele Spieler und es werden jeweils die Items platziert*/}
+
+      
+          
           {items?.length&&
+
+          
            <div className='playerColumns'>
-                    {activeRoom.players.map((player, i) => (
+                    {gameState.players.map((player) => (
                         <PlayerColumn
-                          key={i}
-                          player={player}
-                          placements={placement[i]}
-                          previewItem={items[currentItemIndex]}
-                          previewPosition={selectedPosition}
+                          key={player.id}
+                          player={player.name}
+                          placements={gs.placements[player.id] ?? Array(gs.totalRounds).fill(null)}
+                          previewItem={items[gs.currentRound]}
+                          previewPosition={player.id === myId ? selectedPosition : null}
                       />
                     ))}
                 </div>
                 }
+
+                
         </div>
 
 
-
+        <button onClick={()=>{
+          console.log('Current GameState:', gameState);
+        }}>
+          GameState log
+        </button>
 
 
       </div>

@@ -3,6 +3,8 @@ import './PlayerColumn.css'
 
 const PlayerColumn = ({ player, placements, previewItem, previewPosition }) => {
 
+
+
     
     return (
         <div className='playerColumnContainer'>
@@ -15,9 +17,10 @@ const PlayerColumn = ({ player, placements, previewItem, previewPosition }) => {
                     return (
                         <div key={i} className={`slot ${isPreview ? 'preview' : ''}`}>
                             {display ? (
-                                <img src={`http://localhost:2500${display.img}`} alt={display.name} />
+                                console.log('display:', display) ||
+                                <img className='item-image' src={`http://localhost:2500${display.img}`} alt={display.name} />
                             ) : (
-                                <span>leer</span>
+                                <div className='image-placeholder'></div>
                             )}
                         </div>
                     );

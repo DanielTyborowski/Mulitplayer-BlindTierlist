@@ -1,8 +1,16 @@
 import ConfirmButton from '../Buttons/ConfirmButton/ConfirmButton';
+import NextRoundButton from '../Buttons/NextRoundButton/NextRoundButton';
 import './PickNumber.css'
+import ReadyCounter from '../ReadyCounter/ReadyCounter';
 
 
-const PickNumber = ({selectedPosition, onSelect, onNext, takenPositions}) =>{
+const PickNumber = ({selectedPosition, onSelect, onNext, onNextRound, takenPositions, gameState , myId}) =>{
+
+    const isHost = !!myId && myId === gameState.hostId
+    //const isHost = myId === gameState.hostId;
+
+
+    console.log(myId)
 
 
     const colors = ['#ff33cf', '#ff8b33', '#fff533', '#33ff36', 
@@ -12,12 +20,17 @@ const PickNumber = ({selectedPosition, onSelect, onNext, takenPositions}) =>{
     return(
         <>
         <div className='pickNumberContainer'>
-            {Array.from({ length: 10 }).map((_, i) => {
+            {Array.from({ length: gameState.gameState.totalRounds }).map((_, i) => {
                     
                     const isTaken = takenPositions.includes(i);
                     const isSelected = selectedPosition === i;
 
                     return (
+
+
+
+
+
                         <button
                             key={i}
                             className={`numberBlock 
@@ -39,7 +52,30 @@ const PickNumber = ({selectedPosition, onSelect, onNext, takenPositions}) =>{
           
 
         </div>
+
+
+        
+
         <ConfirmButton className="confirmButton" onNext={onNext}></ConfirmButton>
+        <ReadyCounter
+            readyCount={gameState.gameState.submittedThisRound.length}
+            totalPlayers={gameState.players?.length}
+        >
+        </ReadyCounter>
+        {isHost&&
+            <>
+            <NextRoundButton
+                className="nextRoundButton"
+                onNext={() =>{
+                    console.log('onNextRound:', onNextRound);
+                    onNextRound();
+                }}
+                disable={gameState.gameState.submittedThisRound.length < gameState.players?.length}
+            ></NextRoundButton>
+           
+            </>
+
+        }
         </>
     )
 
