@@ -1,6 +1,7 @@
 import './ItemCard.css';
 import RoundCounter from '../RoundCounter/RoundCounter';
 
+
 const ItemCard = ({item, index}) =>{
 
     

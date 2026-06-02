@@ -99,6 +99,7 @@ const handleMessage = (uuid, message) => {
                 currentRound: 0,
                 totalRounds,
                 placements: {},
+                revealPlacements: {},
                 submittedThisRound: [],
      
             }
@@ -174,26 +175,6 @@ const handleMessage = (uuid, message) => {
          //if (room.hostId !== uuid) return;
 
         room.gameState.phase = 'GAME_START';
-
-        /*
-        room.players.forEach(({ ws, id }) => {
-            sendToClient(ws, {
-                type: 'GAME_STATE',
-                payload: {
-                    code: user.state.roomId,
-                    hostId: room.hostId,
-                    myId: id,   
-                    players: room.players.map(p => ({ id: p.id, name: p.name })),
-                    gameState: room.gameState,
-                    tierlistId: room.tierlistId
-                }
-            })
-
-
-
-*/
-
-
                  
         broadcast(user.state.roomId, {
         type: 'GAME_STATE',
@@ -227,20 +208,32 @@ const handleMessage = (uuid, message) => {
             gs.submittedThisRound.push(uuid);
         }
 
-        room.players.forEach(({ws, id}) =>{
-            
-            ws.send(JSON.stringify({
-                type:'GAME_STATE',
-                payload:{
-                    code: user.state.roomId,
-                    hostId: room.hostId,
-                    myId: id,
-                    players: room.players.map(p => ({ id: p.id, name: p.name})),
-                    gameState: gs,
-                    tierlistId: room.tierlistId
-                }
-            }))
-        })
+
+        if(!gs.revealPlacements[uuid]){
+            gs.revealPlacements[uuid] = Array (gs.totalRounds).fill(null);
+        }
+
+        room.players.forEach(({ws, id}) => {
+        ws.send(JSON.stringify({
+            type: 'GAME_STATE',
+            payload: {
+                code: user.state.roomId,
+                hostId: room.hostId,
+                myId: id,
+                players: room.players.map(p => ({ id: p.id, name: p.name})),
+                // eigene echten Daten + fremde nur revealed
+                gameState: {
+                    ...gs,
+                    placements: {
+                        ...gs.revealedPlacements,
+                        [id]: gs.placements[id] ?? Array(gs.totalRounds).fill(null)
+                    }
+                },
+                tierlistId: room.tierlistId
+            }
+        }));
+    });
+
     }
 
 
@@ -254,6 +247,8 @@ const handleMessage = (uuid, message) => {
             const gs = room.gameState;
             const allSubmitted = room.players.every(p => gs.submittedThisRound.includes(p.id));
              if (!allSubmitted) return;
+
+             gs.revealedPlacements = JSON.parse(JSON.stringify(gs.placements));
 
             gs.currentRound += 1;
             gs.submittedThisRound = [];

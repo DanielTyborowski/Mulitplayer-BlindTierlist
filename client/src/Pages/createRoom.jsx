@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 const CreateRoom = ({username, onCreateRoom,onNavigate, onBack}) =>{
     const [rounds, setRounds] = useState(10);
     const [maxPlayer, setMaxPlayer] =useState(4);
+   
 
 
     const [tierlists, setTierlists] = useState([]);
@@ -47,6 +48,8 @@ const CreateRoom = ({username, onCreateRoom,onNavigate, onBack}) =>{
                     <option key={tl._id} value={tl._id}>{tl.name}</option>
                 ))}
                 </select>
+
+            
                 
 
                 <div className="button-container">
