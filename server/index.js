@@ -15,8 +15,6 @@ import {parse} from 'url'
 import tierlistRouter from './routes/tierlists.js'
 
 
-
-
 dotenv.config();
 
 const port = process.env.port || 2500;
@@ -98,6 +96,7 @@ const handleMessage = async (uuid, message) => {
         }
 
         rooms[code] = {
+
             hostId: uuid,
             tierlistId,
             pool,
@@ -128,6 +127,7 @@ const handleMessage = async (uuid, message) => {
             type: 'GAME_STATE',
             payload: {
                 code, 
+                myId: uuid,
                 pool: rooms[code].pool,
                 hostId: uuid,
                 players: [{id: uuid, name: playerName, state: user.state}],
@@ -295,12 +295,6 @@ const handleMessage = async (uuid, message) => {
     
 
 
-
-
-
-  
-
-
     if (type === 'SUBMIT_RANKING') {
     const { ranking } = payload;
     const room = rooms[user.state.roomId];
@@ -323,7 +317,6 @@ const handleMessage = async (uuid, message) => {
         room.players.forEach(p => p.ranking = null);
     }
 }
-
 
 
 }
@@ -355,10 +348,7 @@ wss.on('connection', (connection, request) => {
 
     connection.send(JSON.stringify({
         type: 'WELCOME',
-        
-            id: uuid
-
-        
+            id: uuid       
     }))
     console.log(uuid)
     
@@ -368,11 +358,6 @@ wss.on('connection', (connection, request) => {
 
     
 });
-
-
-
-
-
 
 
 const init = async () => {

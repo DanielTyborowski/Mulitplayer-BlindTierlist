@@ -21,7 +21,8 @@
     margin-bottom: 2px;
 }
 .slots{
-    
+    width: 200px;
+    height: 110px;
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -29,6 +30,14 @@
     border-radius: 8px;
 }
 
+
+
+.image-slot {
+    width: 200px;
+    height: 114px;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
 
 
 
@@ -45,6 +54,8 @@
     height: 110px;
     object-fit: cover;
     object-position: center;
+
+    margin-bottom: 0px;
 
     border-radius: 8px;
 }

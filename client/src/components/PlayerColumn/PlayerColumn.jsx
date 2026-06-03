@@ -15,7 +15,7 @@ const PlayerColumn = ({ player, placements, previewItem, previewPosition }) => {
                     const display = item ?? (isPreview ? previewItem : null);
 
                     return (
-                        <div key={i} className={`slot ${isPreview ? 'preview' : ''}`}>
+                        <div key={i} className={`slot image-slot ${isPreview ? 'preview' : ''}`}>
                             {display ? (
                                 console.log('display:', display) ||
                                 <img className='item-image' src={`http://localhost:2500${display.img}`} alt={display.name} />
