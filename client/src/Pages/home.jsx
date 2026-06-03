@@ -33,10 +33,7 @@ const Home = ({ onNavigate }) => {
         }
 
     }
-    
 
-    //<button onClick={onStart}>Spiel erstellen</button>
-    // <button onClick={onStart}>Spiel beitreten</button>
     return (
         <>
             <div className="home-container">

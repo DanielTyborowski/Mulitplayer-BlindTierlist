@@ -108,12 +108,16 @@ const App = () => {
     sendJsonMessage({type: 'SUBMIT_POSITION', payload: {position, item}})
   }
 
+  const handleResetGame = () => {
+    sendJsonMessage({type: 'RESET_GAME', payload: {gameCode: gameState.code}});
+  }
+
 
   if (page === 'home') return <Home onNavigate={handleNavigate} />;
   if (page === 'create') return <CreateRoom username={username} onCreateRoom={handleCreateRoom} onNavigate={handleNavigate} onBack={() => setPage('home')} />;
   if (page === 'join') return <JoinLobby username={username} onJoinRoom={handleJoinRoom} onBack={() => setPage('home')} />;
   if (page === 'lobby') return <Lobby username={username} gameState={gameState} onNavigate={handleNavigate} onStartGame={handleStartGame} />;
-  if (page === 'tierlist') return <Tierlist username={username} myId={myId} gameState={gameState} onSubmitPosition={handleSubmitPosition} onNextRound={handleNextRound}/>;
+  if (page === 'tierlist') return <Tierlist username={username} myId={myId} gameState={gameState} onSubmitPosition={handleSubmitPosition} onNextRound={handleNextRound} onResetGame={handleResetGame} />;
   if (page === 'createTierlist') return <CreateTierlist onBack={() => setPage('home')} />;
   
   if (page === 'testPage') return <TestPage></TestPage>

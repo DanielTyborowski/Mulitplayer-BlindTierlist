@@ -10,7 +10,7 @@ const PickNumber = ({selectedPosition, onSelect, onNext, onNextRound, takenPosit
 
 
 
-    console.log(myId)
+    console.log('pick number: ', myId)
 
 
     const colors = ['#ff0000', '#ff6f00', '#fff64c', '#75af48', 

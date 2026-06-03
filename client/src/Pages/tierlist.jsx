@@ -7,11 +7,12 @@ import ItemCard from '../components/ItemCard/ItemCard'
 import PickNumber from '../components/PickNumber/PickNumber'
 import NumberBlock from '../components/NumberBlock/NumberBlock'
 import PlayerColumn from '../components/PlayerColumn/PlayerColumn'
+import EndScreen from '../components/EndScreen/EndScreen'
 
 
 
 
-function Tierlist({gameState, onNextRound, onSubmitPosition ,myId}) {
+function Tierlist({gameState, onNextRound, onSubmitPosition ,myId, onResetGame}) {
 
     const [selectedPosition, setSelectedPosition] = useState(null);
     const [items, setItems] = useState([]);
@@ -42,7 +43,7 @@ function Tierlist({gameState, onNextRound, onSubmitPosition ,myId}) {
     }
 
 
-    if(gs.phase === 'GAME_OVER') return <p>SPiel vorbei</p>;
+    
 
 
   
@@ -104,6 +105,12 @@ function Tierlist({gameState, onNextRound, onSubmitPosition ,myId}) {
             
         </div>
 
+  
+        {
+          gs.phase === 'GAME_OVER'&&
+        
+        <EndScreen  onResetGame={onResetGame} gameState={gameState} myId={myId}></EndScreen>
+        }
       </div>
       
     </>

@@ -167,7 +167,7 @@ const handleMessage = async (uuid, message) => {
                 
                 type: 'GAME_STATE',
                 payload: {
-                    //code: gameCode,
+                    code: gameCode,
                     pool: room.pool,
                     hostId: room.hostId,
                     myId: id,
@@ -183,6 +183,34 @@ const handleMessage = async (uuid, message) => {
             }));
             
             
+        });
+    }
+
+
+    if (type === 'RESET_GAME') {
+        const { gameCode } = payload;
+        const room = rooms[gameCode];
+        if (!room) return;
+        if (room.hostId !== uuid) return;
+        console.log('RESET_GAME received, hostId:', room.hostId, 'uuid:', uuid);
+        room.gameState.currentRound = 0;
+        room.gameState.placements = {};
+        room.gameState.revealPlacements = {};
+        room.gameState.submittedThisRound = [];
+        room.gameState.phase = 'GAME_START';
+        room.players.forEach(({ ws, id }) => {
+            ws.send(JSON.stringify({
+                type: 'GAME_STATE', 
+                payload: {
+                    pool: room.pool,
+                    code: gameCode,
+                    hostId: room.hostId,
+                    myId: id,
+                    players: room.players.map(p => ({ id: p.id, name: p.name })),
+                    gameState: room.gameState,
+                    tierlistId: room.tierlistId
+                }
+            }))
         });
     }
 
@@ -302,28 +330,8 @@ const handleMessage = async (uuid, message) => {
     
 
 
-    if (type === 'SUBMIT_RANKING') {
-    const { ranking } = payload;
-    const room = rooms[user.state.roomId];
-    const player = room.players.find(p => p.id === uuid);
     
-    player.ranking = ranking;
 
-    // Prüfen ob alle abgestimmt haben
-    const allSubmitted = room.players.every(p => p.ranking !== null);
-    if (allSubmitted) {
-        // Ergebnisse an alle schicken
-        broadcast(room.code, {
-            type: 'ROUND_RESULTS',
-            payload: {
-                rankings: room.players.map(p => ({ name: p.name, ranking: p.ranking }))
-            }
-        });
-
-        // Rankings zurücksetzen für nächste Runde
-        room.players.forEach(p => p.ranking = null);
-    }
-}
 
 
 }
