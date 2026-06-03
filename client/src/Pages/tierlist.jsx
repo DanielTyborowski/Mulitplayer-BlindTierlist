@@ -12,7 +12,7 @@ import EndScreen from '../components/EndScreen/EndScreen'
 
 
 
-function Tierlist({gameState, onNextRound, onSubmitPosition ,myId, onResetGame}) {
+function Tierlist({gameState, onNextRound, onSubmitPosition ,myId, onResetGame, onNavigate}) {
 
     const [selectedPosition, setSelectedPosition] = useState(null);
     const [items, setItems] = useState([]);
@@ -80,7 +80,7 @@ function Tierlist({gameState, onNextRound, onSubmitPosition ,myId, onResetGame})
 
 
         {/*Tierlist*/}
-        <div className='tierlistBoard'>
+        <div className='tierlistBoard' id='tierlist-result'>
 
           {/*Keine Funktion nur Deko*/}
           <NumberBlock rows={gameState.gameState.totalRounds}></NumberBlock>
@@ -109,7 +109,7 @@ function Tierlist({gameState, onNextRound, onSubmitPosition ,myId, onResetGame})
         {
           gs.phase === 'GAME_OVER'&&
         
-        <EndScreen  onResetGame={onResetGame} gameState={gameState} myId={myId}></EndScreen>
+        <EndScreen  onResetGame={onResetGame} gameState={gameState} myId={myId} onNavigate={onNavigate}></EndScreen>
         }
       </div>
       

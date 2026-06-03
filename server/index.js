@@ -310,6 +310,10 @@ const handleMessage = async (uuid, message) => {
 
             if (gs.currentRound >= gs.totalRounds) {
                 gs.phase = 'GAME_OVER';
+                gs.currentRound = gs.totalRounds -1;
+            } else{
+                
+
             }
 
             room.players.forEach(({ ws, id }) => {

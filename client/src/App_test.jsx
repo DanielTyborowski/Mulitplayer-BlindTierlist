@@ -1,7 +1,5 @@
 import { useState } from 'react'
-
 import './App.css'
-
 import Home from './Pages/home'
 import CreateRoom from './Pages/createRoom'
 import JoinLobby from './Pages/joinLobby'
@@ -11,10 +9,7 @@ import TestPage from './Pages/testPage'
 import Tierlist from './Pages/tierlist';
 import CreateTierlist from './Pages/CreateTierlist/CreateTierlist'
 
-
 const WS_URL = 'ws://localhost:2500';
-
-
 
 const App = () => {
 
@@ -117,8 +112,8 @@ const App = () => {
   if (page === 'create') return <CreateRoom username={username} onCreateRoom={handleCreateRoom} onNavigate={handleNavigate} onBack={() => setPage('home')} />;
   if (page === 'join') return <JoinLobby username={username} onJoinRoom={handleJoinRoom} onBack={() => setPage('home')} />;
   if (page === 'lobby') return <Lobby username={username} gameState={gameState} onNavigate={handleNavigate} onStartGame={handleStartGame} />;
-  if (page === 'tierlist') return <Tierlist username={username} myId={myId} gameState={gameState} onSubmitPosition={handleSubmitPosition} onNextRound={handleNextRound} onResetGame={handleResetGame} />;
-  if (page === 'createTierlist') return <CreateTierlist onBack={() => setPage('home')} />;
+  if (page === 'tierlist') return <Tierlist username={username} myId={myId} gameState={gameState} onSubmitPosition={handleSubmitPosition} onNextRound={handleNextRound} onResetGame={handleResetGame} onNavigate={handleNavigate}/>;
+  if (page === 'createTierlist') return <CreateTierlist onBack={() => setPage('home')}  />;
   
   if (page === 'testPage') return <TestPage></TestPage>
 
