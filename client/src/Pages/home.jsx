@@ -59,7 +59,7 @@ const Home = ({ onNavigate }) => {
                     <button onClick={() => handleNavigate('create')}>Spiel erstellen</button>
                     <button onClick={() => handleNavigate('join')}>Spiel beitreten</button>
                 </div>
-                
+                <button onClick={() => handleNavigate('createTierlist')}>Create Tierlist</button>
 
             </div>
             

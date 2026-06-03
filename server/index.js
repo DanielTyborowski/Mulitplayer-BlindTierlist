@@ -10,9 +10,13 @@ import dotenv from 'dotenv';
 import { db, initDB } from './db.js';
 import { v4 as uuidv4 } from 'uuid';
 import {parse} from 'url'
+
+import multerfrom from 'multer';
+
 //import { promises as fs } from 'fs';
 
 import tierlistRouter from './routes/tierlists.js'
+import uploadRouter from './routes/upload.js'
 
 
 dotenv.config();
@@ -25,11 +29,14 @@ server.use(express.json());
 server.use('/data', express.static(path.join('.', 'data')))
 server.use('/tierlist', tierlistRouter);
 
+server.use('/upload', uploadRouter);
+
 
 const httpServer = createServer(server)
 const wss = new WebSocketServer({server: httpServer})
 
 await initDB();
+
 
 
 

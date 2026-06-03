@@ -1,0 +1,62 @@
+.ct-container {
+    align-self: flex-start;
+    width: 100%;
+    padding: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.ct-container * {
+    text-align: left;
+}
+
+.ct-back {
+    margin-bottom: 1rem;
+}
+
+.ct-input-full {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    box-sizing: border-box;
+}
+
+.ct-item-row {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.ct-preview-img {
+    width: 80px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+}
+
+.ct-input-item {
+    flex: 1;
+    padding: 0.5rem;
+}
+
+.ct-remove {
+    flex-shrink: 0;
+}
+
+.ct-actions {
+    margin-top: 0.5rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.ct-container h2 {
+    text-align: left;
+}
+
+.ct-back {
+    display: block;
+    text-align: left;
+    margin-bottom: 1rem;
+}
