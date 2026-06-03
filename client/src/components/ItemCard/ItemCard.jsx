@@ -2,9 +2,9 @@ import './ItemCard.css';
 import RoundCounter from '../RoundCounter/RoundCounter';
 
 
-const ItemCard = ({item, index}) =>{
+const ItemCard = ({item, index, totalRounds}) =>{
 
-    
+  
 
     return(
         <div className='itemCardContainer'>
@@ -13,7 +13,7 @@ const ItemCard = ({item, index}) =>{
             </div>
             <div className='itemCardTextContainer'>
                 <div className='itemName'>{item.name}</div>
-                <RoundCounter counter={index}></RoundCounter>
+                <RoundCounter counter={index} maxRound={totalRounds}></RoundCounter>
             </div>
             
         </div>

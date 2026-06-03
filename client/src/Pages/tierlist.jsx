@@ -19,23 +19,14 @@ function Tierlist({gameState, onNextRound, onSubmitPosition ,myId}) {
     const gs = gameState.gameState;
     const currentRound = gs.currentRound;
 
+    console.log(gameState);
 
-useEffect(() => {
-  if (gameState.pool) setItems(gameState.pool);
-
-  
-}, [gameState.pool]);
-
-
-
-    /*
-    
     useEffect(() => {
-      console.log('GameState:',gameState)
-      fetch(`http://localhost:2500/tierlist/${gameState.tierlistId}`)
-      .then(res => res.json())
-      .then(doc => doc && setItems(doc.pool))
-    },[])*/
+      if (gameState.pool) setItems(gameState.pool);
+
+      
+    }, [gameState.pool]);
+
 
 
     const takenPositions = Object.values(gs.placements[myId]??[])
@@ -70,7 +61,7 @@ useEffect(() => {
         <div className='leftBlockContainer'>
           
           {items?.length&&
-            <ItemCard item={items[currentRound]} index={currentRound +1} ></ItemCard>
+            <ItemCard item={items[currentRound]} index={currentRound +1} totalRounds={gameState.gameState.totalRounds} ></ItemCard>
           }
           <PickNumber
                     selectedPosition={selectedPosition}
@@ -94,10 +85,7 @@ useEffect(() => {
           <NumberBlock rows={gameState.gameState.totalRounds}></NumberBlock>
 
           {/*Die Spieler Spalten
-          Bekommen Info über wie viele Spieler und es werden jeweils die Items platziert*/}
-
-      
-          
+          Bekommen Info über wie viele Spieler und es werden jeweils die Items platziert*/}    
           {items?.length&&
 
           
@@ -113,13 +101,8 @@ useEffect(() => {
                     ))}
                 </div>
                 }
-
-                
+            
         </div>
-
-
-        
-
 
       </div>
       

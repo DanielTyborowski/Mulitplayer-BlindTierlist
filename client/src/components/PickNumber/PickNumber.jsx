@@ -7,7 +7,7 @@ import ReadyCounter from '../ReadyCounter/ReadyCounter';
 const PickNumber = ({selectedPosition, onSelect, onNext, onNextRound, takenPositions, gameState , myId}) =>{
 
     const isHost = !!myId && myId === gameState.hostId
-    //const isHost = myId === gameState.hostId;
+
 
 
     console.log(myId)
