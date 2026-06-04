@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react'
 
-import './tierlist.css'
+import './Tierlist.css'
 
 //components
-import ItemCard from '../components/ItemCard/ItemCard'
-import PickNumber from '../components/PickNumber/PickNumber'
-import NumberBlock from '../components/NumberBlock/NumberBlock'
-import PlayerColumn from '../components/PlayerColumn/PlayerColumn'
-import EndScreen from '../components/EndScreen/EndScreen'
+import ItemCard from '../../components/ItemCard/ItemCard'
+import PickNumber from '../../components/PickNumber/PickNumber'
+import NumberBlock from '../../components/NumberBlock/NumberBlock'
+import PlayerColumn from '../../components/PlayerColumn/PlayerColumn'
+import EndScreen from '../../components/EndScreen/EndScreen'
 
 
 

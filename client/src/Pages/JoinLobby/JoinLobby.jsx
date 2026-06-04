@@ -1,4 +1,4 @@
-import './joinLobby.css'
+import './JoinLobby.css'
 import { useState } from "react"
 
 

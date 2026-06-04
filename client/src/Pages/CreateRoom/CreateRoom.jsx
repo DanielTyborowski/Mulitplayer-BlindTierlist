@@ -1,7 +1,7 @@
 
-import './createRoom.css'
+import './CreateRoom.css'
 
-import BackButton from '../components/Buttons/BackButton/BackButton';
+import BackButton from '../../components/Buttons/BackButton/BackButton';
 
 import { useEffect, useState } from "react";
 
@@ -39,16 +39,7 @@ const CreateRoom = ({username, onCreateRoom,onNavigate, onBack}) =>{
                         <option value={10}>10 Runden</option>
                     </select>
 
-                    {/* 
-                    <label>Spieler</label>
-                    <select value={maxPlayer} onChange={(e) => setRounds(Number(e.target.value))}>
-                        <option value={2}>2 Spieler</option>
-                        <option value={3}>3 Spieler</option>
-                        <option value={4}>4 Spieler</option>
-                        <option value={5}>5 Spieler</option>
 
-                    </select>
-                        */}
                     <label>Tierlist</label>
                     <select value={selectedTierlist} onChange={(e) => setSelectedTierlist(e.target.value)}>
                     {tierlists.map(tl => (

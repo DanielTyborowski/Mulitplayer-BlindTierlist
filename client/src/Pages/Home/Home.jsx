@@ -1,4 +1,4 @@
-import './home.css'
+import './Home.css'
 import {useState } from 'react';
 
 const Home = ({ onNavigate }) => {
