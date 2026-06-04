@@ -8,6 +8,7 @@ import Lobby from './Pages/lobby';
 import TestPage from './Pages/testPage'
 import Tierlist from './Pages/tierlist';
 import CreateTierlist from './Pages/CreateTierlist/CreateTierlist'
+import EditTierlist from './Pages/EditTierlist/EditTierlist'
 
 const WS_URL = 'ws://localhost:2500';
 
@@ -113,8 +114,9 @@ const App = () => {
   if (page === 'join') return <JoinLobby username={username} onJoinRoom={handleJoinRoom} onBack={() => setPage('home')} />;
   if (page === 'lobby') return <Lobby username={username} gameState={gameState} onNavigate={handleNavigate} onStartGame={handleStartGame} />;
   if (page === 'tierlist') return <Tierlist username={username} myId={myId} gameState={gameState} onSubmitPosition={handleSubmitPosition} onNextRound={handleNextRound} onResetGame={handleResetGame} onNavigate={handleNavigate}/>;
-  if (page === 'createTierlist') return <CreateTierlist onBack={() => setPage('home')}  />;
   
+  if (page === 'createTierlist') return <CreateTierlist onBack={() => setPage('home')}  />;
+  if (page === 'editTierlist') return <EditTierlist onBack= {() => setPage('home')} />;
   if (page === 'testPage') return <TestPage></TestPage>
 
 

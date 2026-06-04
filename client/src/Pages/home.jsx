@@ -56,8 +56,11 @@ const Home = ({ onNavigate }) => {
                     <button onClick={() => handleNavigate('create')}>Spiel erstellen</button>
                     <button onClick={() => handleNavigate('join')}>Spiel beitreten</button>
                 </div>
-                <button onClick={() => handleNavigate('createTierlist')}>Create Tierlist</button>
 
+                <div className='edit-button-container'>
+                    <button className='create-tierlist-button' onClick={() => handleNavigate('createTierlist')}>Create Tierlist</button>
+                    <button className='edit-tierlist-button' onClick={() => handleNavigate('editTierlist')}>Edit Tierlists</button>
+                </div>
             </div>
             
         </>  
