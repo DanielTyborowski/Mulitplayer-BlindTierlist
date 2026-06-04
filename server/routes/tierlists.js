@@ -27,19 +27,31 @@ const upload = multer({ storage });
 
 // Delete entire Tierlist
 router.delete('/:id', async (req, res) => {
-    const doc =  await db.get(req.params.id);
+    const doc = await db.get(req.params.id);
+    const folder = req.params.id.replace('tierlist:', '');
+    const dir = `./data/${folder}`;
+    if (fs.existsSync(dir)) {
+        fs.rmSync(dir, { recursive: true, force: true });
+    }
     await db.destroy(doc._id, doc._rev);
-    res.json({ ok: true});
+    res.json({ ok: true });
 })
 
 
 // remove item from tierlist
 router.delete('/:id/item/:itemIndex', async (req, res) =>{
-    const doc =  await db.get(req.params.id);
+    const doc = await db.get(req.params.id);
     const index = parseInt(req.params.itemIndex);
+    const item = doc.pool[index];
+    if (item?.img) {
+        const filePath = `.${item.img}`;
+        if (fs.existsSync(filePath)) {
+            fs.unlinkSync(filePath);
+        }
+    }
     doc.pool.splice(index, 1);
     await db.insert(doc);
-    res.json({ok: true, pool: doc.pool});
+    res.json({ ok: true, pool: doc.pool });
 })
 
 
