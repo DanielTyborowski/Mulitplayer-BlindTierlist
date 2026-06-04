@@ -1,41 +1,36 @@
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 body {
   background: #0f0f1c;
   font-family: 'Nunito', sans-serif;
 }
 
-.create-room-container {
+.join-room-container {
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 2rem;
 }
 
-.create-room-panel {
+.join-room-panel {
   background: #181828;
   border: 1.5px solid #2a2a4a;
   border-radius: 24px;
   padding: 2.5rem 2.8rem;
-  width: 380px;
+  width: 420px;
   position: relative;
-  z-index: 1;
   box-shadow:
     0 0 0 1px #484de818,
     0 8px 40px #0008,
     inset 0 1px 0 #ffffff08;
 }
 
-.lobby-divider {
-  height: 1px;
-  background: white;
-  margin: 1.2rem 0;
-}
-
-.create-room-title {
-  font-family: 'Nunito', sans-serif;
+.join-room-panel h2 {
   font-size: 2rem;
   font-weight: 400;
   color: white;
@@ -44,12 +39,7 @@ body {
   letter-spacing: 0.01em;
 }
 
-.create-room-title span {
-  color: white;
-}
-
-.create-room-container > p,
-.create-room-panel > p {
+.join-room-panel > p {
   font-size: 0.85rem;
   color: #6060a0;
   text-align: center;
@@ -57,73 +47,61 @@ body {
   letter-spacing: 0.03em;
 }
 
-.create-room-panel > p strong {
+.join-room-panel > p strong {
   color: white;
   font-weight: 700;
 }
 
-.create-room-panel label {
-  display: block;
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #6060a0;
-  margin-bottom: 0.35rem;
-  margin-top: 1.1rem;
-}
-
-.create-room-panel select {
+.join-room-panel input {
   width: 100%;
-  padding: 0.65rem 1rem;
+  padding: 0.9rem 1rem;
   background: #12121f;
   border: 1.5px solid #2a2a4a;
-  border-radius: 12px;
+  border-radius: 14px;
   color: #eaeaff;
   font-family: 'Nunito', sans-serif;
-  font-size: 0.95rem;
-  font-weight: 600;
-  appearance: none;
-  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236060a0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 1rem center;
 }
 
-.create-room-panel select:hover,
-.create-room-panel select:focus {
+.join-room-panel input::placeholder {
+  color: #6060a0;
+  letter-spacing: 0.08em;
+}
+
+.join-room-panel input:hover,
+.join-room-panel input:focus {
   border-color: #484de8;
   box-shadow: 0 0 0 3px #484de833;
 }
 
-.create-room-panel select option {
-  background: #181828;
-  color: #eaeaff;
+.error {
+  margin-top: 0.75rem;
+  text-align: center;
+  color: #ff6b81;
+  font-size: 0.85rem;
+  font-weight: 600;
 }
 
-.create-room-divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #2a2a4a, transparent);
-  margin: 1.6rem 0 0.4rem;
-}
-
-.create-room-button-container {
+.button-container {
   display: flex;
-  align-items: center;
   flex-direction: column;
   gap: 0.75rem;
   margin-top: 1.8rem;
 }
 
-.create-room-button {
+.button-container button:first-child {
   width: 100%;
   padding: 0.8rem;
   background: #484de8;
   border: none;
   border-radius: 14px;
-  color: #ffffff;
+  color: white;
   font-family: 'Nunito', sans-serif;
   font-size: 0.95rem;
   font-weight: 800;
@@ -133,18 +111,18 @@ body {
   box-shadow: 0 4px 20px #484de855;
 }
 
-.create-room-button:hover {
+.button-container button:first-child:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 28px #484de855;
   background: #6568f0;
+  box-shadow: 0 6px 28px #484de855;
 }
 
-.create-room-button:active {
-  transform: translateY(0px) scale(0.98);
+.button-container button:first-child:active {
+  transform: translateY(0) scale(0.98);
   box-shadow: 0 2px 10px #484de833;
 }
 
-.back-button {
+.button-container button:last-child {
   width: 100%;
   padding: 0.75rem;
   background: transparent;
@@ -158,7 +136,7 @@ body {
   transition: border-color 0.2s, color 0.2s, background 0.2s;
 }
 
-.back-button:hover {
+.button-container button:last-child:hover {
   border-color: #484de8;
   color: #484de8;
   background: #484de833;

@@ -36,6 +36,8 @@
 
 }
 
+
+
 .home-button-container button{
     margin-left: 20px;
     margin-right: 20px;
@@ -48,7 +50,7 @@
     box-shadow: 8px;
     border-color: transparent;
     
-    background-color: #212163;
+    background-color: #484de8;
     font-size: large;
     color:white;
     font-family: 'Nunito', sans-serif;
@@ -64,9 +66,18 @@
 
 
 
+.home-divider {
+    
+    width: 300px;
+    height: 1px;
+    background: white;
+    margin: 1.2rem 0;
+}
+
+
 .edit-button-container{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
@@ -78,13 +89,13 @@
     height: 50px;
 
 
-    margin-top: 30px;
+
 
     border-radius: 20px;
     box-shadow: 8px;
     border-color: transparent;
     
-    background-color: #212163;
+    background-color: #8a8ab2;
     font-size: large;
     color:white;
     font-family: 'Nunito', sans-serif;

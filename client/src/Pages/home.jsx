@@ -1,5 +1,5 @@
 import './home.css'
-import { use, useState } from 'react';
+import {useState } from 'react';
 
 const Home = ({ onNavigate }) => {
 
@@ -10,28 +10,10 @@ const Home = ({ onNavigate }) => {
 
     const handleNavigate = (target) =>{
         if (username.trim() === '') {
-            alert('Bitte gib einen Benutzernamen ein.');
+            setError('Bitte gib einen Benutzernamen ein.');
             return;
         }
         onNavigate(target, username.trim());
-    }
-
-
-
-    const handleCreate = () => {
-        if (username.trim() === '') {
-            alert('Bitte gib einen Benutzernamen ein.');
-            return;
-        }
-        onCreateRoom(username.trim());
-    }
-
-    const handleJoin = () => {
-        if(username.trim() === ''){
-            alert('Bitte gib einen Benutzername ein.')
-            return;
-        }
-
     }
 
     return (
@@ -56,10 +38,11 @@ const Home = ({ onNavigate }) => {
                     <button onClick={() => handleNavigate('create')}>Spiel erstellen</button>
                     <button onClick={() => handleNavigate('join')}>Spiel beitreten</button>
                 </div>
+                <div className="home-divider" />
 
                 <div className='edit-button-container'>
-                    <button className='create-tierlist-button' onClick={() => handleNavigate('createTierlist')}>Create Tierlist</button>
-                    <button className='edit-tierlist-button' onClick={() => handleNavigate('editTierlist')}>Edit Tierlists</button>
+                    <button className='create-tierlist-button' onClick={() => onNavigate('createTierlist')}>Create Tierlist</button>
+                    <button className='edit-tierlist-button' onClick={() => onNavigate('editTierlist')}>Edit Tierlists</button>
                 </div>
             </div>
             
