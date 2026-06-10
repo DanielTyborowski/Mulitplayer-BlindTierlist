@@ -28,10 +28,6 @@ const PickNumber = ({selectedPosition, onSelect, onNext, onNextRound, takenPosit
 
                     return (
 
-
-
-
-
                         <button
                             key={i}
                             className={`numberBlock 
@@ -47,16 +43,8 @@ const PickNumber = ({selectedPosition, onSelect, onNext, onNextRound, takenPosit
                     );
                 })}
 
-            
-
-            
-
-          
 
         </div>
-
-
-        
 
         <ConfirmButton className="confirmButton" onNext={onNext}></ConfirmButton>
         <ReadyCounter 
@@ -76,7 +64,6 @@ const PickNumber = ({selectedPosition, onSelect, onNext, onNextRound, takenPosit
             ></NextRoundButton>
            
             </>
-
         }
         </>
     )

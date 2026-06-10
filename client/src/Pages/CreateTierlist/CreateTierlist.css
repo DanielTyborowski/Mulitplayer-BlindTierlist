@@ -42,7 +42,13 @@
 }
 
 .ct-remove {
-    flex-shrink: 0;
+    display: flex;
+    width: 30px;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+
 }
 
 .ct-actions {
@@ -56,7 +62,11 @@
 }
 
 .ct-back {
-    display: block;
-    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 30px;
+    border-radius: 8px;
     margin-bottom: 1rem;
 }

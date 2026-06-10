@@ -69,7 +69,7 @@ router.post('/:id/item', upload.single('image'), async(req, res) =>{
 
 
 
-
+// get all tierlists
 router.get('/', async (req, res) =>{
     const result = await db.list({
         include_docs: true,
@@ -80,7 +80,7 @@ router.get('/', async (req, res) =>{
     res.json(docs)
 })
 
-
+// get specific tierlist
 router.get('/:id', async (req, res) =>{
     const doc = await db.get(req.params.id);
 

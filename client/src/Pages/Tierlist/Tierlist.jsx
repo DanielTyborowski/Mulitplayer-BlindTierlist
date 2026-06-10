@@ -10,8 +10,6 @@ import PlayerColumn from '../../components/PlayerColumn/PlayerColumn'
 import EndScreen from '../../components/EndScreen/EndScreen'
 
 
-
-
 function Tierlist({gameState, onNextRound, onSubmitPosition ,myId, onResetGame, onNavigate}) {
 
     const [selectedPosition, setSelectedPosition] = useState(null);
@@ -28,8 +26,6 @@ function Tierlist({gameState, onNextRound, onSubmitPosition ,myId, onResetGame, 
       
     }, [gameState.pool]);
 
-
-
     const takenPositions = Object.values(gs.placements[myId]??[])
       .map((item, i) => item !== null ? i:null)
       .filter(i => i !== null);
@@ -41,16 +37,6 @@ function Tierlist({gameState, onNextRound, onSubmitPosition ,myId, onResetGame, 
       onSubmitPosition(selectedPosition, items[currentRound]);
       setSelectedPosition(null); 
     }
-
-
-    
-
-
-  
-
-    
-
-
 
   return(
     <>
@@ -88,8 +74,7 @@ function Tierlist({gameState, onNextRound, onSubmitPosition ,myId, onResetGame, 
           {/*Die Spieler Spalten
           Bekommen Info über wie viele Spieler und es werden jeweils die Items platziert*/}    
           {items?.length&&
-
-          
+         
            <div className='playerColumns'>
                     {gameState.players.map((player) => (
                         <PlayerColumn
@@ -104,8 +89,7 @@ function Tierlist({gameState, onNextRound, onSubmitPosition ,myId, onResetGame, 
                 }
             
         </div>
-
-  
+ 
         {
           gs.phase === 'GAME_OVER'&&
         
