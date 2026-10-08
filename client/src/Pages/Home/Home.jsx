@@ -10,7 +10,7 @@ const Home = ({ onNavigate }) => {
 
     const handleNavigate = (target) =>{
         if (username.trim() === '') {
-            setError('Bitte gib einen Benutzernamen ein.');
+            setError('Please insert your name');
             return;
         }
         onNavigate(target, username.trim());
@@ -19,11 +19,11 @@ const Home = ({ onNavigate }) => {
     return (
         <>
             <div className="home-container">
-                <h1>Willkommen zum Multiplayer Blind Tierlist Maker!</h1>
+                <h1>Multiplayer Blind Tierlist Maker!</h1>
                 <input
                     className='nameInput'
                     type='text'
-                    placeholder='Name eingeben' 
+                    placeholder='your Name' 
                     value={username}
                     onChange={(e) => {setUsername(e.target.value); setError('')}}
                 ></input>
@@ -35,8 +35,8 @@ const Home = ({ onNavigate }) => {
 
 
                    
-                    <button onClick={() => handleNavigate('create')}>Spiel erstellen</button>
-                    <button onClick={() => handleNavigate('join')}>Spiel beitreten</button>
+                    <button onClick={() => handleNavigate('create')}>Create Game</button>
+                    <button onClick={() => handleNavigate('join')}>Join Game</button>
                 </div>
                 <div className="home-divider" />
 
